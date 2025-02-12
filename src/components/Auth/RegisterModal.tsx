@@ -20,6 +20,7 @@ const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
   } = useForm({
     defaultValues: {
       name: "",
+      username: "",
       email: "",
       password: "",
       phone: "",
@@ -42,10 +43,10 @@ const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
       }
 
       const response = await AuthService.register(data);
-      console.log("Login successful:", response);
+      console.log("Register successful:", response);
+      router.push("/dashboard");
       onClose();
       reset();
-      router.push("/dashboard");
       // Redirect or update UI state
     } catch (error: any) {
       setError("root", {
@@ -77,6 +78,24 @@ const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
           />
           {errors.name && (
             <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>
+          )}
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Username
+          </label>
+          <input
+            type="text"
+            className={`block w-full px-3 py-2 sm:text-sm border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 ${
+              errors.name ? "border-red-500" : "border-gray-300"
+            }`}
+            {...register("username", {
+              required: "Username is required",
+            })}
+          />
+          {errors.username && (
+            <p className="mt-1 text-xs text-red-500">
+              {errors.username.message}
+            </p>
           )}
         </div>
 

@@ -6,7 +6,7 @@ export const AuthService = {
   async login(payload: LoginPayload) {
     try {
       const response = await axiosInstance.post("/auth/login", payload);
-      console.log(response.data);
+      //   console.log(response.data);
       useAuthStore.getState().setToken(response?.data?.data?.token || "");
       return response.data;
     } catch (error) {
@@ -17,6 +17,7 @@ export const AuthService = {
   async register(payload: RegisterPayload) {
     try {
       const response = await axiosInstance.post("/auth/register", payload);
+      //   console.log(response);
       useAuthStore.getState().setToken(response?.data?.data?.token || "");
       return response.data;
     } catch (error) {
